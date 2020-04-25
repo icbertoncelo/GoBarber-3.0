@@ -16,16 +16,25 @@ You can install node using [nvm](https://github.com/nvm-sh/nvm) or accessing [no
 
 Access the [yarn install docs](https://classic.yarnpkg.com/pt-BR/docs/install/#debian-stable)
 
-## Running Application
+## Running application
 
-- You must up the application containers. To make it, in you terminal run:
+Before all:
+
+- Rename the 'ormconfig.example.json' file to 'ormconfig.json' and set your database configuration.
+- After configure the orm, you must create a database using the same name you has setted on ormconfig.json (You can use IDE to make it).
+
+## Running with yarn (Recommended)
+
+In this case you up only the services containers. To make it, in you terminal run:
+
+- You must build and up the services containers
+- After build a first time, you can run withot --build flag
+- In you terminal run:
 
 ```console
-docker-compose -f docker-compose-dev.yml up
+docker-compose -f docker-compose-services.yml up --build
 ```
 
-- Now, rename the ormconfig.example.json to ormconfig.json and set your database configuration.
-- After configure the orm, you must create a database using the same name you has setted on ormconfig.json (You can use IDE to make it).
 - Execute the migrations. In you terminal run:
 
 ```console
@@ -36,4 +45,24 @@ yarn typeorm migration:run
 
 ```console
 yarn dev:server
+```
+
+### Running with docker
+
+In this case docker will execute the server and all services.
+
+- You must build and up the application containers
+- After build a first time, you can run withot --build flag
+- In you terminal run:
+
+```console
+docker-compose up --build
+```
+
+- Caso encontre Error: connect ECONNREFUSED 127.0.0.1:5432, modifique o host do seu db(se isso ocorrer, voce vai precisar rodar as migrations pelo shell do container).
+
+- Execute the migrations.
+
+```console
+yarn typeorm migration:run
 ```

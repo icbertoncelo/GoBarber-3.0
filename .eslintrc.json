@@ -21,6 +21,13 @@
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
     "@typescript-eslint/camelcase": "off",
+    "no-useless-constructor": "off",
+    "@typescript-eslint/interface-name-prefix": [
+      "error",
+      {
+        "prefixWithI": "always"
+      }
+    ],
     "@typescript-eslint/no-unused-vars": [
       "error",
       {

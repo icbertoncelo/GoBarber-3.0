@@ -1,5 +1,5 @@
-import app from './app';
+import app from '@shared/infra/http/app';
 
 app.listen(process.env.APP_PORT, () =>
-  console.log('Server runing on http://localhost:3333'),
+  console.log(`Server runing on http://localhost:${process.env.APP_PORT}`),
 );

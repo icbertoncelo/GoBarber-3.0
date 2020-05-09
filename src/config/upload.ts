@@ -5,7 +5,9 @@ import { randomBytes } from 'crypto';
 const tmpDirectory = resolve(__dirname, '..', '..', 'tmp');
 
 export default {
-  derectory: tmpDirectory,
+  tmpFolder: tmpDirectory,
+  uploadsFolder: resolve(tmpDirectory, 'uploads'),
+
   storage: diskStorage({
     destination: tmpDirectory,
     filename(request, file, callback) {

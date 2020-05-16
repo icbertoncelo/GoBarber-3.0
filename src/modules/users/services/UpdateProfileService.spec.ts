@@ -36,15 +36,9 @@ describe('UpdateProfile', () => {
   });
 
   it('should not be able to update the profile data from a non-existing user', async () => {
-    await fakeUsersRepository.create({
-      name: 'John Doe',
-      email: 'johndoe@gmail.com',
-      password: '123456',
-    });
-
     await expect(
       updateProfile.execute({
-        user_id: 'wrong-id',
+        user_id: 'non-existing-user-id',
         name: 'Updated Name',
         email: 'johndoe@gmail.com',
       }),

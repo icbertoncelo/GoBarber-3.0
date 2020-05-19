@@ -11,6 +11,13 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - '${POSTGRES_PORT}:${POSTGRES_PORT}'
+  mongodb:
+    image: mongo
+    env_file:
+      - .env
+    container_name: ${MONGO_DB}
+    ports:
+      - '${MONGO_PORT}:${MONGO_PORT}'
   server:
     build:
       dockerfile: Dockerfile.dev

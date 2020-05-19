@@ -22,6 +22,7 @@ Before all:
 
 - Rename the 'ormconfig.example.json' file to 'ormconfig.json' and set your database configuration.
 - After configure the orm, you must create a database using the same name you has setted on ormconfig.json (You can use IDE to make it).
+- Now, you must configurate the credentials to send emails in development mode in your '.env' file. To make it, you need to access [Ethereal](https://ethereal.email/) and create an account. This is necessary because sometimes the createTestAccount method fall and crash the send email service.
 
 ## Running with yarn (Recommended)
 

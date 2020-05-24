@@ -18,3 +18,11 @@ services:
     container_name: ${MONGO_DB}
     ports:
       - '${MONGO_PORT}:${MONGO_PORT}'
+  redis:
+    image: 'redis:alpine'
+    env_file: .env
+    container_name: ${REDIS_NAME}
+    environment:
+      REDIS_HOST: ${REDIS_HOST}
+    ports:
+      - '${REDIS_PORT}:${REDIS_PORT}'

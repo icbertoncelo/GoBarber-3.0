@@ -1,9 +1,16 @@
-FROM node:alpine
+FROM node:lts-alpine
 
-WORKDIR /app
+RUN mkdir -p /home/node/api/node_modules && chown -R node:node /home/node/api
 
-COPY package.json .
-RUN npm install
-COPY . .
+WORKDIR /home/node/api
 
-CMD ["npm", "run", "dev:server"]
+COPY package.json yarn.* ./
+
+USER node
+
+RUN yarn
+COPY --chown=node:node . .
+
+EXPOSE 3333
+
+CMD ["yarn", "dev:server"]

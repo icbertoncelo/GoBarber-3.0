@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  postgres:
+  gostack-postgres:
     image: postgres
     env_file:
       - .env
@@ -11,14 +11,14 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - '${POSTGRES_PORT}:${POSTGRES_PORT}'
-  mongodb:
+  gostack-mongodb:
     image: mongo
     env_file:
       - .env
     container_name: ${MONGO_DB}
     ports:
       - '${MONGO_PORT}:${MONGO_PORT}'
-  redis:
+  gostack-redis:
     image: 'redis:alpine'
     env_file: .env
     container_name: ${REDIS_NAME}

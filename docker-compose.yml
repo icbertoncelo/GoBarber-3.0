@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  postgres:
+  gostack-postgres:
     image: 'postgres:latest'
     env_file:
       - .env
@@ -11,14 +11,22 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - '${POSTGRES_PORT}:${POSTGRES_PORT}'
-  mongodb:
+    volumes:
+      - gostack-postgres-data/data
+    networks:
+      - gostack-network
+  gostack-mongodb:
     image: mongo
     env_file:
       - .env
     container_name: ${MONGO_DB}
     ports:
       - '${MONGO_PORT}:${MONGO_PORT}'
-  redis:
+    volumes:
+      - gostack-mongo-data/data
+    networks:
+      - gostack-network
+  gostack-redis:
     image: 'redis:alpine'
     env_file: .env
     container_name: ${REDIS_NAME}
@@ -26,17 +34,33 @@ services:
       REDIS_HOST: ${REDIS_HOST}
     ports:
       - '${REDIS_PORT}:${REDIS_PORT}'
-  server:
+    volumes:
+      - gostack-redis-data/data
+    networks:
+      - gostack-network
+  gostack-server:
     build:
       dockerfile: Dockerfile.dev
       context: .
     volumes:
-      - /app/node_modules
-      - .:/app
+      - /home/node/api/node_modules
+      - .:/home/node/api
     depends_on:
-      - postgres
+      - gostack-postgres
+      - gostack-redis
     env_file:
       - .env
     container_name: ${APP_NAME}
     ports:
       - '${APP_PORT}:${APP_PORT}'
+    networks:
+      - gostack-network
+
+volumes:
+  gostack-redis-data:
+  gostack-postgres-data:
+  gostack-mongo-data:
+
+networks:
+  gostack-network:
+    driver: bridge

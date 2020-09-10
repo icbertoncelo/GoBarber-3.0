@@ -4,13 +4,13 @@
     "type": "postgres",
     "host": "localhost",
     "port": 5432,
-    "username": "",
+    "username": "docker",
     "password": "",
-    "database": "",
-    "entities": ["src/models/*.ts"],
-    "migrations": ["src/database/migrations/*.ts"],
+    "database": "gostack_postgres",
+    "entities": ["src/modules/**/infra/typeorm/entities/*.ts"],
+    "migrations": ["src/shared/infra/typeorm/migrations/*.ts"],
     "cli": {
-      "migrationsDir": "src/database/migrations"
+      "migrationsDir": "src/shared/infra/typeorm/migrations"
     }
   },
   {
@@ -18,7 +18,7 @@
     "type": "mongodb",
     "host": "localhost",
     "port": 27017,
-    "database": "",
+    "database": "gostack_mongodb",
     "useUnifiedTopology": true,
     "entities": ["src/modules/**/infra/typeorm/schemas/*.ts"]
   }

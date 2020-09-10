@@ -18,6 +18,8 @@
     "type": "mongodb",
     "host": "localhost",
     "port": 27017,
+    "username": "docker",
+    "password": "",
     "database": "gostack_mongodb",
     "useUnifiedTopology": true,
     "entities": ["src/modules/**/infra/typeorm/schemas/*.ts"]

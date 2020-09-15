@@ -13,8 +13,4 @@ COPY --chown=node:node . .
 
 EXPOSE 3333
 
-FROM nginx:latest
-EXPOSE 80
-COPY ./default.conf /etc/nginx/gobarber.conf
-
 CMD ["yarn", "start"]

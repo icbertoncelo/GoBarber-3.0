@@ -14,7 +14,7 @@ services:
     ports:
       - '${POSTGRES_PORT}:5432'
     volumes:
-      - gostack-postgres-data/data
+      - gostack-postgres-data:/data
     networks:
       - gostack-network
   gostack-mongodb:
@@ -30,7 +30,7 @@ services:
     ports:
       - '${MONGO_PORT}:27017'
     volumes:
-      - gostack-mongo-data/data
+      - gostack-mongo-data:/data
     networks:
       - gostack-network
   gostack-redis:
@@ -43,7 +43,7 @@ services:
     ports:
       - '${REDIS_PORT}:6379'
     volumes:
-      - gostack-redis-data/data
+      - gostack-redis-data:/data
     networks:
       - gostack-network
   gostack-server:

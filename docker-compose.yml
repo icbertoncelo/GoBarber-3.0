@@ -2,14 +2,15 @@ version: '3'
 
 services:
   gostack-postgres:
-    image: 'postgres:latest'
+    image: 'bitnami/postgresql:latest'
     env_file:
       - .env
     container_name: 'gostack-postgres'
+    restart: always
     environment:
-      POSTGRES_USER: 'docker'
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: 'gostack-postgres'
+      POSTGRESQL_USERNAME: 'docker'
+      POSTGRESQL_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRESQL_DATABASE: 'gostack_postgres'
     ports:
       - '${POSTGRES_PORT}:5432'
     volumes:
@@ -17,13 +18,15 @@ services:
     networks:
       - gostack-network
   gostack-mongodb:
-    image: mongo
+    image: 'bitnami/mongodb:latest'
     env_file:
       - .env
     container_name: 'gostack-mongodb'
+    restart: always
     environment:
-      MONGO_INITDB_ROOT_USERNAME: 'docker'
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+      MONGODB_USERNAME: 'docker'
+      MONGODB_PASSWORD: ${MONGO_PASSWORD}
+      MONGODB_DATABASE: 'gostack_mongodb'
     ports:
       - '${MONGO_PORT}:27017'
     volumes:
@@ -31,11 +34,12 @@ services:
     networks:
       - gostack-network
   gostack-redis:
-    image: 'redis:alpine'
+    image: 'bitnami/redis:latest'
     env_file: .env
     container_name: 'gostack-redis'
+    restart: always
     environment:
-      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
     ports:
       - '${REDIS_PORT}:6379'
     volumes:
@@ -43,15 +47,14 @@ services:
     networks:
       - gostack-network
   gostack-server:
-    build:
-      dockerfile: Dockerfile.dev
-      context: .
+    build: .
     volumes:
       - /home/node/api/node_modules
       - .:/home/node/api
     depends_on:
-      - gostack-postgres
       - gostack-redis
+      - gostack-postgres
+      - gostack-mongodb
     env_file:
       - .env
     container_name: 'gostack-server'

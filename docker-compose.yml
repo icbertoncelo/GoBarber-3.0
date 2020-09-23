@@ -63,14 +63,12 @@ services:
     networks:
       - gostack-network
   nginx:
-    restart: always
-    depends_on:
-      - gostack-server
     build:
       dockerfile: Dockerfile
       context: ./nginx
-    env_file:
-      - .env
+    restart: always
+    depends_on:
+      - gostack-server
     container_name: 'gostack-nginx'
     ports:
       - '3050:80'

@@ -60,9 +60,8 @@ In this case docker will execute the server and all services.
 docker-compose up --build
 ```
 
-- Caso encontre Error: connect ECONNREFUSED 127.0.0.1:5432, modifique o host do seu db(se isso ocorrer, voce vai precisar rodar as migrations pelo shell do container).
-
-- Execute the migrations.
+- docker exec -it gostack-server /bin/sh
+- Rodar migrations
 
 ```console
 yarn typeorm migration:run

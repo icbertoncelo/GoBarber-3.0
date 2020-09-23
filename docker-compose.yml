@@ -62,7 +62,18 @@ services:
       - '${APP_PORT}:${APP_PORT}'
     networks:
       - gostack-network
-
+  nginx:
+    restart: always
+    depends_on:
+      - gostack-server
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    env_file:
+      - .env
+    container_name: 'gostack-nginx'
+    ports:
+      - '3050:80'
 volumes:
   gostack-redis-data:
   gostack-postgres-data:

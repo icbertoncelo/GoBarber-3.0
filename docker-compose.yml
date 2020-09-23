@@ -72,6 +72,9 @@ services:
     container_name: 'gostack-nginx'
     ports:
       - '3050:80'
+    networks:
+      - gostack-network
+
 volumes:
   gostack-redis-data:
   gostack-postgres-data:

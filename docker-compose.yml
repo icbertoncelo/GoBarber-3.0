@@ -71,7 +71,7 @@ services:
       - gostack-server
     container_name: 'gostack-nginx'
     ports:
-      - '3050:80'
+      - '80:80'
     networks:
       - gostack-network
 
